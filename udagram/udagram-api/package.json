@@ -12,7 +12,8 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "prod": "tsc && node ./www/server.js",
     "clean": "rm -rf www/ || true",
-    "build": "sh ./bin/build.sh",
+    "build": "npm run clean && tsc && cp -rf src/config www/config && cp .npmrc www/.npmrc && cp package.json www/package.json",
+    "archive": "cd www && zip a -tzip Archive.zip . && cd ..",
     "test": "jasmine",
     "deploy": "sh ./bin/deploy.sh"
   },
