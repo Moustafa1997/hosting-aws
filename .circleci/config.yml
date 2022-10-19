@@ -12,14 +12,8 @@ jobs:
       - checkout
       - aws-cli/setup
       - eb/setup
-      - run:
-          name: Install Back-End Dependencies
-          command: 'npm run backend:install'
-     
-      - run:
-          name: Install Front-End Dependencies
-          command: 'npm run frontend:install'
-  
+    
+
       - run:
           name: Deploy Backend
           command: 'npm run backend:deploy'
