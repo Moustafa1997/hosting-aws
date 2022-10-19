@@ -17,10 +17,10 @@ jobs:
           command: 'npm run backend:install'
       - run:
           name: Build and Archive Server
-          command: |-
-            npm run build
-            printenv > www/.env
-            npm run archive
+          command: 
+            "npm run build"
+          
+            "npm run archive"
           
       - run:
           name: Install Front-End Dependencies
