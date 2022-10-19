@@ -8,7 +8,7 @@ jobs:
     executor: node/default
     steps:
       - checkout:
-          path: ~/app
+          path: ~/udagram
       - node/install-packages:
           app-dir: ~/udagram/udagram-frontend
       - run:
@@ -23,7 +23,7 @@ jobs:
     executor: node/default
     steps:
       - checkout:
-          path: ~/app
+          path: ~/udagram
       - node/install-packages:
           app-dir: ~/udagram/udagram-api
       - run:
