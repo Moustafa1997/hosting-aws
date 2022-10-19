@@ -13,7 +13,7 @@
     "prod": "tsc && node ./www/server.js",
     "clean": "rm -rf www/ || true",
     "build": "npm run clean && tsc && cp -rf src/config www/config && cp -R .elasticbeanstalk www/.elasticbeanstalk && cp .npmrc www/.npmrc && cp package.json www/package.json && cd www &&npm run archive",
-    "archive":"zip a    Archive.zip . && cd ..",
+    "archive":"zip a    a.zip . && cd ..",
     "test": "jasmine",
     "deploy": "sh ./bin/deploy.sh"
   },
