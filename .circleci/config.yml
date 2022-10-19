@@ -1,69 +1,40 @@
 version: 2.1
 orbs:
   node: circleci/node@4.1.0
-  aws-cli: circleci/aws-cli@2.0.3
-  eb: circleci/aws-elastic-beanstalk@1.0.0
+  eb: circleci/aws-elastic-beanstalk@2.0.0
+  aws-cli: circleci/aws-cli@2.0.2
 jobs:
   build:
     docker:
-      - image: "cimg/base:stable"
-    steps:
-      - node/install
-      - node/install-yarn
-      - checkout
-      - run:
-          name: API dependencies
-          command: |
-            npm run api:install
-      - run:
-          name: Front End dependencies
-          command: |
-            npm run frontend:install
-      - run:
-          name: Build API
-          command: |
-            npm run api:build
-      - run:
-          name: Build UI
-          command: |
-            npm run frontend:build
-  deploy:
-    docker:
-      - image: "cimg/base:stable" 
+      - image: 'cimg/base:stable'
     steps:
       - node/install
       - checkout
       - aws-cli/setup
       - eb/setup
       - run:
-          name: Front End dependencies
-          command: |
-            npm run frontend:install
+          name: Install Back-End Dependencies
+          command: 'npm run backend:install'
       - run:
-          name: Build UI
-          command: |
-            npm run frontend:build
+          name: Back-End Build
+          command: 'npm run backend:build'
       - run:
-          name: Deploy UI
-          command: |
-            npm run frontend:deploy
+          name: Install Front-End Dependencies
+          command: 'npm run frontend:install'
       - run:
-          name: API dependencies
-          command: |
-            npm run api:install
+          name: Front-End Build
+          command: 'npm run frontend:build'
       - run:
-          name: Build API
-          command: |
-            npm run api:build
+          name: Deploy Backend
+          command: 'npm run backend:deploy'
       - run:
-          name: Deploy API
-          command: |
-            npm run api:deploy
+          name: Deploy Frontend
+          command: 'npm run frontend:deploy'
 workflows:
-  udagram:
+  version: 2.1
+  build:
     jobs:
-      - build
-      - deploy:
+      - build:
           filters:
             branches:
-              only: master
+              only: main
