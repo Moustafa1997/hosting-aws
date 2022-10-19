@@ -21,4 +21,4 @@ global:
   sc: git
   workspace_type: Application
 deploy:
-  artifact: www/a.zip
+  artifact: www/Archive.zip
