@@ -1,47 +1,69 @@
 version: 2.1
 orbs:
-  node: circleci/node@4.2.0
-  aws-cli: circleci/aws-cli@2.0.0
+  node: circleci/node@4.1.0
+  aws-cli: circleci/aws-cli@2.0.3
+  eb: circleci/aws-elastic-beanstalk@1.0.0
 jobs:
-  frontend:
-    working_directory: ~/udagram/udagram-frontend
-    executor: node/default
+  build:
+    docker:
+      - image: "cimg/base:stable"
     steps:
-      - checkout:
-          path: ~/udagram
-      - node/install-packages:
-          app-dir: ~/udagram/udagram-frontend
+      - node/install
+      - node/install-yarn
+      - checkout
       - run:
-          name: Build Frontend
-          command: npm run build
-      - aws-cli/install
+          name: API dependencies
+          command: |
+            npm run api:install
       - run:
-          name: Deploy Frontend
-          command: aws s3 cp --recursive --acl public-read ./www $S3_BUCKET_FRONTEND
-  server:
-    working_directory: ~/udagram/udagram-api
-    executor: node/default
+          name: Front End dependencies
+          command: |
+            npm run frontend:install
+      - run:
+          name: Build API
+          command: |
+            npm run api:build
+      - run:
+          name: Build UI
+          command: |
+            npm run frontend:build
+  deploy:
+    docker:
+      - image: "cimg/base:stable" 
     steps:
-      - checkout:
-          path: ~/udagram
-      - node/install-packages:
-          app-dir: ~/udagram/udagram-api
+      - node/install
+      - checkout
+      - aws-cli/setup
+      - eb/setup
       - run:
-          name: Build and Archive Server
-          command: |-
-            npm run build
-            printenv > www/.env
-            npm run archive
-      - aws-cli/install
+          name: Front End dependencies
+          command: |
+            npm run frontend:install
       - run:
-          name: Deploy Server
-          command: |-
-            aws s3 cp ./www/Archive.zip $S3_BUCKET_SERVER
-            aws elasticbeanstalk create-application-version --application-name $EB_APP --version-label <<pipeline.git.revision>> --source-bundle S3Bucket="$EB_BUCKET",S3Key="Archive.zip"
-            aws elasticbeanstalk update-environment --application-name $EB_APP --environment-name $EB_ENV --version-label <<pipeline.git.revision>>
-
+          name: Build UI
+          command: |
+            npm run frontend:build
+      - run:
+          name: Deploy UI
+          command: |
+            npm run frontend:deploy
+      - run:
+          name: API dependencies
+          command: |
+            npm run api:install
+      - run:
+          name: Build API
+          command: |
+            npm run api:build
+      - run:
+          name: Deploy API
+          command: |
+            npm run api:deploy
 workflows:
-  build_and_deploy:
+  udagram:
     jobs:
-      - frontend
-      - server
+      - build
+      - deploy:
+          filters:
+            branches:
+              only: master
