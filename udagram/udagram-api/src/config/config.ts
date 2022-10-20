@@ -6,7 +6,8 @@ export const config = {
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
   host: process.env.POSTGRES_HOST,
-  port: Number(process.env.DBPORT),//for server
+  port: Number(process.env.PORT),
+  dbport: Number(process.env.DBPORT),//for server
 
   dialect: "postgres",
   aws_region: process.env.AWS_REGION,
