@@ -1,8 +1,7 @@
 set -x
 set -e
 
-eb init  joe  --platform node.js --region us-east-1
- eb create --sample joe-env
+ 
 eb use joe-env
 
 eb setenv AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID &&
