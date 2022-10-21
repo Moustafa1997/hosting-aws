@@ -1,11 +1,11 @@
 branch-defaults:
   master:
-    environment: udagram-app-env
+    environment: joe-env
     group_suffix: null
 deploy:
   artifact: www/Archive.zip
 global:
-  application_name: udagram-app
+  application_name: joe
   branch: null
   default_ec2_keyname: null
   default_platform: Node.js 16
