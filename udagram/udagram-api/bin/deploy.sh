@@ -1,13 +1,13 @@
 set -x
 set -e
 
-eb use udagram-env
+eb use udagram-app-env
 
 eb setenv POSTGRES_HOST=$POSTGRES_HOST
           POSTGRES_DB=$POSTGRES_DB
           POSTGRES_USERNAME=$POSTGRES_USERNAME
           POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-          DB_PORT=$DB_PORT
+          DATABASE_PORT=$DATABASE_PORT
           PORT=$PORT
           AWS_REGION=$AWS_REGION
           AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
@@ -17,4 +17,4 @@ eb setenv POSTGRES_HOST=$POSTGRES_HOST
           AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
           URL=$URL
 
-eb deploy udagram-env
+eb deploy udagram-app-env
