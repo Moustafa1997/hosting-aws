@@ -1,7 +1,9 @@
 set -x
 set -e
 
-eb use udagram-app-env
+eb init  joe  --platform node.js --region us-east-1
+ eb create --sample joe-env
+eb use joe-env
 
 eb setenv AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID &&
 eb setenv AWS_BUCKET=$AWS_BUCKET &&
@@ -16,4 +18,4 @@ eb setenv POSTGRES_PASSWORD=$POSTGRES_PASSWORD &&
 eb setenv POSTGRES_USERNAME=$POSTGRES_USERNAME &&
 eb setenv URL=$URL 
 
-eb deploy udagram-app-env
+eb deploy joe-env
