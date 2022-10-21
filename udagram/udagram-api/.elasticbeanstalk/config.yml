@@ -1,11 +1,11 @@
 branch-defaults:
   master:
-    environment: joe-env
+    environment: aboalazm-env
     group_suffix: null
 deploy:
   artifact: www/Archive.zip
 global:
-  application_name: joe
+  application_name: aboalazm-env
   branch: null
   default_ec2_keyname: null
   default_platform: Node.js 16
