@@ -38,12 +38,22 @@ export class FeedUploadComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-   
+  selectImage(event) {
+    const file = event.srcElement.files;
+
+    if (!file) {
+      return;
+    }
+    this.file = file[0];
+    this.setPreviewDataUrl(this.file);
+
+  }
+
   onSubmit($event) {
     $event.preventDefault();
     this.loadingController.create();
 
-    if (!this.uploadForm.valid) { return; }
+    if (!this.uploadForm.valid || !this.file) { return; }
     this.feed.uploadFeedItem(this.uploadForm.controls.caption.value, this.file)
       .then((result) => {
         this.modalController.dismiss();
