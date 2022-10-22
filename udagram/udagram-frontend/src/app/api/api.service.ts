@@ -5,14 +5,12 @@ import { map } from 'rxjs/operators';
 
 const API_HOST = environment.apiHost;
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json',})
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
   token: string;
