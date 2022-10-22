@@ -1,35 +1,16 @@
 import { Injectable } from '@angular/core';
-
-import express from "express";
 import { HttpClient, HttpHeaders, HttpRequest, HttpEvent } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
- 
-
-var app :any = express();
-
 
 const API_HOST = environment.apiHost;
-const x=app.use(function (req, res, next) {
 
-  // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', '*');
-
-  // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
-  // Pass to next layer of middleware
-  next();
-});
- 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json',x})
+    headers: new HttpHeaders({'Content-Type': 'application/json',"Access-Control-Allow-Origin":"*",     '"Access-Control-Allow-Headers"': "Origin"})
   };
 
   token: string;
@@ -92,7 +73,3 @@ export class ApiService {
     });
   }
 }
-function express() {
-  throw new Error('Function not implemented.');
-}
-
