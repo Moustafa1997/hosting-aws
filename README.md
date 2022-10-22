@@ -9,13 +9,13 @@ This project is integrated with CircleCI for automating pipeline. It will also i
 
 https://app.circleci.com/pipelines/github/Moustafa1997/hosting-aws?branch=master
 
-#### Link to app
-http://udagram-bucket-1.s3-website-us-east-1.amazonaws.com
+#### Link to front app
+http://aboalazm-udagram.s3-website-us-east-1.amazonaws.com
 
-#### Link to server
-http://udagramserver1-env.eba-ias6icmm.us-east-1.elasticbeanstalk.com
+#### Link to server 
+http://aboalazm-env.eba-supt62kz.us-east-1.elasticbeanstalk.com/
 
-#### Run / build / deploy the app on local (on `main` branch)
+#### Run / build / deploy the app on local (on `master` branch)
 
 Create `.env` file inside `udagram-api` with following variables:
 + POSTGRES_HOST
