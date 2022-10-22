@@ -58,7 +58,7 @@ export class ApiService {
     const signed_url = (await this.get(`${endpoint}/signed-url/${file.name}`)).url;
 
     const headers = new HttpHeaders({'Content-Type': file.type});
-    const req = new HttpRequest( 'PUT', signed_url, file,
+    const req = new HttpRequest( 'POST', signed_url, file,
                                   {
                                     headers: headers,
                                     reportProgress: true, // track progress
