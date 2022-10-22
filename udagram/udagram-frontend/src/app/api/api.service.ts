@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest, HttpEvent } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
- crossOriginIsolated
+
 const API_HOST = environment.apiHost;
 
 @Injectable({
@@ -10,7 +10,7 @@ const API_HOST = environment.apiHost;
 })
 export class ApiService {
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
+    headers: new HttpHeaders({"content-type": "application/x-www-form-urlencoded",})
   };
 
   token: string;
